@@ -6,7 +6,7 @@
             "id": "d930949d-9a01-4be2-ab0a-1200cb5576f7",
             "actions": [
                 {
-                    "name": "6DOF",
+                    "name": "Movement",
                     "type": "PassThrough",
                     "id": "21c064c4-2372-4e07-a29a-71e69ee48bc1",
                     "expectedControlType": "Vector2",
@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Dash",
+                    "name": "Roll Left",
                     "type": "Button",
                     "id": "f4809799-05a4-49c0-9768-34f4c2861dc7",
                     "expectedControlType": "Button",
@@ -69,7 +69,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Fire Secondary",
+                    "name": "Roll Right",
                     "type": "Button",
                     "id": "cb7875bc-1582-4a21-8fe9-4e613ffe9615",
                     "expectedControlType": "Button",
@@ -86,7 +86,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "6DOF",
+                    "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -119,7 +119,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Dash",
+                    "action": "Roll Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -163,7 +163,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Fire Secondary",
+                    "action": "Roll Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
