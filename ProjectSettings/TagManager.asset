@@ -7,14 +7,18 @@ TagManager:
   - Inner Bounds
   - Middle Bounds
   - Outer Bounds
+  - Sprite
+  - PlayerBullet
+  - Enemy
+  - DeadZone
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
+  - Enemy
   - 
   - 
   - 

@@ -1,131 +1,218 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-
+using UnityEngine.Windows;
+using UnityEngine.UIElements.Experimental;
+using FMODUnity;
 
 public class InputManager : MonoBehaviour
 {
-    public Vector2 RawMovementInput;
-    public Vector2 ThrustInput;
-    public bool HoveringUp;
-    public bool HoveringDown;
-    private PlayerInput input;
-    public bool RollingLeft;
-    public bool RollingRight;
-
-    [Header("Debug")]
-    public float debugRayLength;
+    public static InputManager instance { get; private set; }
+    public PlayerInput input;
 
 
-    // Start is called before the first frame update
-    void Start()
+
+   
+
+    private void Awake()
     {
-        RawMovementInput = new Vector2(0, 0);
-        input = GetComponent<PlayerInput>();
-        RollingRight = false;
-        RollingLeft = false;
+        if (instance != null)
+        {
+            Debug.LogError("Found an Input Manager object, destroying new one.");
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
-
 
     private void Update()
     {
-
+        //Focus();
+        //ShootPrimary();
+        //ShootSecondary();
+        Roll();
     }
 
 
+    #region ThirdPersonController
+    //[Header("Movement")]
+    //public Vector2 RawMovementInput;
 
-    //public float MaxXVelocity;
-    public void FixedUpdate()
-    {
-        //if (rb.velocity.x > MaxXVelocity || rb.velocity.x < -MaxXVelocity)
-        //{
-        //    if (Mathf.Sign(rb.velocity.x) < 0)
-        //    {
-        //        rb.velocity = new Vector3(-MaxXVelocity, rb.velocity.y, rb.velocity.z);
-        //    } else
-        //    {
-        //        rb.velocity = new Vector3(MaxXVelocity, rb.velocity.y, rb.velocity.z);
-        //    }
-        //}
+    //[Header("Jump")]
+    //public bool JumpPressed;
 
-        //Boost();
-    }
+    //[Header("Shooting")]
+    //public bool ShootingPrimary;
+    //public bool BlockPrimaryShootingUntilShootButtonIsStopped;
 
-    //public float boostForce;
-    //public void Boost()
+    //public bool ShootingSecondary;
+    //public bool BlockSecondaryShootingUntilShootButtonIsStopped;
+
+    //[Header("Dash")]
+    //public bool DashPressed;
+
+    //[Header("Focus")]
+    //public bool hasPlayedFocusSound = false;
+    //public bool FocusPressed;
+
+    // MOVEMENT ======================
+    //public void Movement(InputAction.CallbackContext context)
     //{
-    //    if (input.actions["Boost"].IsPressed())
+    //    if (context.performed)
     //    {
-    //        rb.AddForce(transform.forward * boostForce * Time.deltaTime);
+    //        RawMovementInput = context.ReadValue<Vector2>().normalized;
     //    }
     //}
 
-    public void Thrust(InputAction.CallbackContext context)
+
+
+
+    // JUMP =========================
+    //public void Jump(InputAction.CallbackContext context)
+    //{
+    //    if (context.performed)
+    //    {
+    //        JumpPressed = true;
+    //    }
+
+    //    else if (context.canceled)
+    //    {
+    //        JumpPressed = false;
+    //    }
+        
+    //}
+
+
+    // FOCUS ========================
+
+    //public void Focus()
+    //{
+    //    if (input.actions["Focus"].IsPressed())
+    //    {
+    //        FocusPressed = true;
+
+    //        if (!hasPlayedFocusSound)
+    //        {
+    //            RuntimeManager.PlayOneShot(AudioLibrary.ZoomIn, transform.position);
+    //            hasPlayedFocusSound = true;
+    //        }
+
+    //    }
+    //    else if (input.actions["Focus"].WasReleasedThisFrame())
+    //    {
+    //        FocusPressed = false;
+    //        RuntimeManager.PlayOneShot(AudioLibrary.ZoomOut, transform.position);
+    //        hasPlayedFocusSound = false;
+    //    }
+    //}
+
+
+    //// SHOOT PRIMARY
+    //public void ShootPrimary()
+    //{
+    //    if (input.actions["ShootingPrimary"].IsPressed())
+    //    {
+    //        ShootingPrimary = true;
+    //        ShootingSecondary = false;
+    //    }
+
+    //    else if (input.actions["ShootingPrimary"].WasReleasedThisFrame())
+    //    {
+    //        ShootingPrimary = false;
+    //        BlockPrimaryShootingUntilShootButtonIsStopped = false;
+    //    }
+    //}
+
+
+
+
+    //// SHOOT PRIMARY
+    //public void ShootSecondary()
+    //{
+    //    if (input.actions["ShootingSecondary"].IsPressed())
+    //    {
+    //        ShootingSecondary = true;
+    //        ShootingPrimary = false;
+    //    }
+
+    //    else if (input.actions["ShootingSecondary"].WasReleasedThisFrame())
+    //    {
+    //        ShootingSecondary = false;
+    //        BlockSecondaryShootingUntilShootButtonIsStopped = false;
+    //    }
+    //}
+
+
+
+    //// DASH
+    //public void Dash(InputAction.CallbackContext context)
+    //{
+    //    if (!context.performed) return;
+    //    DashPressed = true;
+    //}
+
+    #endregion
+
+    #region KestralController
+    
+    [Header("Kestral Movement")]
+    public static Vector2 RawKestralMovementInput;
+
+    public void MovementKestral(InputAction.CallbackContext context)
     {
+        //Debug.Log(RawKestralMovementInput);
         if (context.performed)
         {
-            ThrustInput = context.ReadValue<Vector2>();
+            RawKestralMovementInput = context.ReadValue<Vector2>().normalized;
         }
     }
 
-    public void HoverUp(InputAction.CallbackContext context)
+    [Header("Roll")]
+    public static bool RollLeft = false;
+    public static bool RollRight = false;
+
+    public void Roll()
     {
-        if (input.actions["Hover Up"].IsPressed())
+        if (input.actions["RollLeft"].IsPressed())
         {
-            HoveringUp = true;
+            RollLeft = true;
+        }
+        else if (input.actions["RollLeft"].WasReleasedThisFrame())
+        {
+            RollLeft = false;
         }
 
-        else if (input.actions["Hover Up"].WasReleasedThisFrame())
+
+
+        if (input.actions["RollRight"].IsPressed())
         {
-            HoveringUp = false;
+            RollRight = true;
         }
+        else if (input.actions["RollRight"].WasReleasedThisFrame())
+        {
+            RollRight = false;
+        }
+
     }
 
-    public void HoverDown(InputAction.CallbackContext context)
+    #endregion
+
+    // UTILITIES =====================
+
+    public void SwitchToUIMap()
     {
-        if (input.actions["Hover Down"].IsPressed())
-        {
-            HoveringDown = true;
-        }
-
-        else if (input.actions["Hover Down"].WasReleasedThisFrame())
-        {
-            HoveringDown = false;
-        }
+        Debug.Log("Switching to UI map");
+        input.SwitchCurrentActionMap("UI");
     }
 
-    public void Movement(InputAction.CallbackContext context)
+    public void SwitchToGameplayMap()
     {
-        if (context.performed)
-        {
-            RawMovementInput = context.ReadValue<Vector2>().normalized;
-        }
+        Debug.Log("Switching to Gameplay Map");
+        input.SwitchCurrentActionMap("Gameplay");
     }
 
-    public void RollLeft(InputAction.CallbackContext context)
-    {
-        if (input.actions["Roll Left"].IsPressed())
-        {
-            RollingLeft = true;
-        }
 
-        else if (input.actions["Roll Left"].WasReleasedThisFrame())
-        {
-            RollingLeft = false;   
-        }
-    }
-
-    public void RollRight(InputAction.CallbackContext context)
-    {
-        if (input.actions["Roll Right"].IsPressed())
-        {
-            RollingRight = true;
-        }
-
-        else if (input.actions["Roll Right"].WasReleasedThisFrame())
-        {
-            RollingRight = false;
-        }
-    }
+    
 
 }
