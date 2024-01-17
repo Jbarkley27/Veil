@@ -6,15 +6,6 @@
             "id": "56f5b04b-55f4-4018-af82-31796aa860ba",
             "actions": [
                 {
-                    "name": "Move",
-                    "type": "PassThrough",
-                    "id": "622318ee-778d-43e2-ae31-a8b6d4549f7d",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Camera",
                     "type": "PassThrough",
                     "id": "451e006c-a425-4ff6-bf4e-bc83f86a55bf",
@@ -69,6 +60,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Move",
+                    "type": "PassThrough",
+                    "id": "622318ee-778d-43e2-ae31-a8b6d4549f7d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Thrust",
+                    "type": "PassThrough",
+                    "id": "a5ba2c42-4f70-4168-bb05-52c3872f3534",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "RollLeft",
                     "type": "Button",
                     "id": "74f4e432-440c-4253-824d-848d811f4303",
@@ -88,17 +97,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "da7f31d0-4f4e-4fd6-9f33-6cda933d3324",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "0bdea34f-c62b-41ff-8373-1ba68464830e",
@@ -184,6 +182,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "RollRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "da7f31d0-4f4e-4fd6-9f33-6cda933d3324",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3512c2c4-2500-4c2c-8356-09eed65bd80f",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Thrust",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

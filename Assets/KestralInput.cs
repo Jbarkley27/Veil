@@ -35,7 +35,6 @@ public class KestralInput : MonoBehaviour
     public GameObject camFollowObject;
     public float rollMult;
     public float playerZRotInput;
-    public float freeVar;
     public Image rotateImage;
 
     public Rigidbody rb;
@@ -109,5 +108,16 @@ public class KestralInput : MonoBehaviour
         frontFollowObject.transform.position = rb.transform.position +
             rb.transform.forward * frontOffset;
 
+    }
+
+    [Header("Thrust")]
+    public float thrustMultiplier;
+    public void HandleThrust()
+    {
+        if (InputManager.ThrustInput.sqrMagnitude != 0)
+        {
+            Vector3 thrustVector = new Vector3(-InputManager.ThrustInput.x, 0, -InputManager.ThrustInput.y);
+            rb.AddForce(thrustMultiplier * Time.deltaTime * thrustVector, ForceMode.VelocityChange);
+        }
     }
 }

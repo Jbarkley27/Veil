@@ -2616,6 +2616,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9e835c94-e450-4c4e-af8e-5d531a02d6e8
     m_ActionName: Gameplay/RollRight[/DualSenseGamepadHID/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 524599490}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: Thrust
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a5ba2c42-4f70-4168-bb05-52c3872f3534
+    m_ActionName: Gameplay/Thrust[/DualSenseGamepadHID/rightStick]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -2646,18 +2662,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c28d972ef74b4477957b445fba71f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deadZoneRotationSpeed: 0.2
-  innerRotationSpeed: 1
-  middleRotationSpeed: 5
-  outerRotationSpeed: 7.5
+  deadZoneRotationSpeed: 0.5
+  innerRotationSpeed: 0.5
+  middleRotationSpeed: 4
+  outerRotationSpeed: 10
   camFollowObject: {fileID: 964398665}
-  rollMult: 40
+  rollMult: 60
   playerZRotInput: 0
-  freeVar: 0
   rotateImage: {fileID: 1300895111}
   rb: {fileID: 524599492}
-  frontOffset: 10
+  frontOffset: 12
   frontFollowObject: {fileID: 1146855986}
+  thrustMultiplier: 0
 --- !u!54 &524599492
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4385,7 +4401,7 @@ Transform:
   m_GameObject: {fileID: 1015788422}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 285.1, z: -521.49}
+  m_LocalPosition: {x: 0, y: 281.94, z: -515.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5182,7 +5198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d70cc20219cd84593f67d248eafe36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Offset: {x: 0, y: 7.1, z: -13.49}
+  m_Offset: {x: 0, y: 3.94, z: -7.77}
   m_ApplyAfter: 1
   m_PreserveComposition: 0
 --- !u!114 &1396396403
@@ -5446,11 +5462,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_LookaheadTime: 0
-  m_LookaheadSmoothing: 0
+  m_LookaheadTime: 0.188
+  m_LookaheadSmoothing: 5.8
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0.5
-  m_VerticalDamping: 0.5
+  m_HorizontalDamping: 0.6
+  m_VerticalDamping: 0.6
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_DeadZoneWidth: 0
@@ -6151,7 +6167,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -648.9, y: 377.3}
+  m_AnchoredPosition: {x: -641.1, y: 382.9}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2018180113

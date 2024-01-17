@@ -196,6 +196,14 @@ public class InputManager : MonoBehaviour
 
     }
 
+    public static Vector2 ThrustInput;
+    public void Thrust(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            ThrustInput = context.ReadValue<Vector2>().normalized;
+        }
+    }
     #endregion
 
     // UTILITIES =====================
