@@ -17,9 +17,17 @@ public class FreeCursorCollision : MonoBehaviour
     public CinemachineVirtualCamera vcam;
     public Transform defaultCamLookAt;
 
+    
+
     void Update()
     {
-        //Debug.Log($"Bounds {currentBounds}");
+        // ensures by default the rotation speed is always slow on startup also since
+        // the reticle starts in the middle of the screen.
+        if (!InputManager.TouchedControls)
+        {
+            currentBounds = Bounds.DEADZONE;
+            HandleRenderingBoundsImages(deadBoundsImage.gameObject.name);
+        }
     }
 
     private void Start()
@@ -29,7 +37,7 @@ public class FreeCursorCollision : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-
+        if (!InputManager.TouchedControls) return;
         if(collision.CompareTag("DeadZone"))
         {
             currentBounds = Bounds.DEADZONE;

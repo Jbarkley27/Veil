@@ -7,20 +7,12 @@ using TMPro;
 public class KestralInput : MonoBehaviour
 {
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
         PlaceFrontFollowObject();
         HandleAnimation();
         HandleUI();
-        TurnAutoAlignUI(InputManager.AutoAlign);
         HandleRoll();
     }
 
@@ -202,12 +194,13 @@ public class KestralInput : MonoBehaviour
     }
 
     public float frontOffset;
+    public float downOffset;
     public GameObject frontFollowObject;
 
     public void PlaceFrontFollowObject()
     {
         frontFollowObject.transform.position = rb.transform.position +
-            rb.transform.forward * frontOffset;
+            rb.transform.forward * frontOffset + rb.transform.up * downOffset;
 
     }
 
@@ -258,7 +251,7 @@ public class KestralInput : MonoBehaviour
 
     public void HandleAnimation()
     {
-        animationValue = FreeCursor.GetAnimationSpeed();
+        animationValue = InputManager.TouchedControls ? FreeCursor.GetAnimationSpeed() : 0;
         
         // make it negative/positive
         animationValue *= !FreeCursor.IsLeftSideScreen() ? -1 : 1;
@@ -280,6 +273,9 @@ public class KestralInput : MonoBehaviour
 
 
         HandleGyro();
+
+
+        TurnAutoAlignUI(InputManager.AutoAlign);
     }
 
     public void HandleGyro()

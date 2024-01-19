@@ -176,15 +176,27 @@ public class FreeCursor : MonoBehaviour
         }
     }
 
+
+    public Transform shadowCamLookAt;
+    public float yOffset;
     public void MoveCameraFollowObject()
     {
         Vector3 reticlePosition = reticleGameObject.transform.position;
         reticlePosition.z = camFollowOffset;
 
+
         Vector3 screenToWorldPoint = Camera.main.ScreenToWorldPoint(reticlePosition);
 
-
+        
 
         camFollow.transform.position = screenToWorldPoint;
+
+        reticlePosition.y += yOffset;
+
+        screenToWorldPoint = Camera.main.ScreenToWorldPoint(reticlePosition);
+
+
+
+        shadowCamLookAt.transform.position = screenToWorldPoint;
     }
 }

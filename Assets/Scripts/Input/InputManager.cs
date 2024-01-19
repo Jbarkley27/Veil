@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
     public static InputManager instance { get; private set; }
     public PlayerInput input;
 
-
+    public static bool TouchedControls = false;
 
    
 
@@ -167,6 +167,7 @@ public class InputManager : MonoBehaviour
         if (context.performed)
         {
             RawKestralMovementInput = context.ReadValue<Vector2>().normalized;
+            TouchedControls = true;
         }
     }
 
