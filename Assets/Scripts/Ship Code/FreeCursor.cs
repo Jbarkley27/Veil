@@ -44,7 +44,7 @@ public class FreeCursor : MonoBehaviour
 
 
 
-    
+    public static Vector3 clampedPos;
     public void HandleReticle()
     {
         if (InputManager.RawKestralMovementInput.magnitude != 0)
@@ -58,7 +58,7 @@ public class FreeCursor : MonoBehaviour
 
 
 
-            Vector3 clampedPos = new Vector3(
+            clampedPos = new Vector3(
                                             Mathf.Clamp(smoothMovement.x, (Screen.width / 2) - (Screen.width * xScreenBoundsPercentage), (Screen.width / 2) + (Screen.width * xScreenBoundsPercentage)),
                                             Mathf.Clamp(smoothMovement.y, (Screen.height / 2) - ((Screen.height * yScreenBoundsPercentage) - bottomScreenOffset), (Screen.height / 2) + (Screen.height * yScreenBoundsPercentage)),
                                             0);
@@ -71,6 +71,29 @@ public class FreeCursor : MonoBehaviour
         MoveCameraFollowObject();
     }
 
+    public static bool IsLeftSideScreen()
+    {
+        float middleX = Screen.width / 2;
+
+        if (clampedPos.x < middleX)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static bool IsBottomOfScreen()
+    {
+        float middleHeight = Screen.height / 2;
+
+        if (clampedPos.y < middleHeight)
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     [Header("Base Reticle")]
     public float defaultReticleSize = 50f;
@@ -128,6 +151,29 @@ public class FreeCursor : MonoBehaviour
         }
 
         baseCrossHair.rectTransform.sizeDelta = Vector3.Lerp(baseCrossHair.rectTransform.sizeDelta, new Vector2(targetState, targetState), baseReticleSpeed * Time.deltaTime);
+    }
+
+    public static float GetAnimationSpeed()
+    {
+        float halfScreenWidth = Screen.width / 2;
+
+        if (clampedPos.x > halfScreenWidth)
+        {
+            // right side
+
+            float test = clampedPos.x - halfScreenWidth;
+
+            return test / halfScreenWidth;
+        }
+
+        else
+        {
+            // left side
+
+            float test2 = halfScreenWidth - clampedPos.x;
+
+            return test2 / halfScreenWidth;
+        }
     }
 
     public void MoveCameraFollowObject()

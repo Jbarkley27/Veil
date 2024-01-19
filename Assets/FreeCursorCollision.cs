@@ -22,6 +22,11 @@ public class FreeCursorCollision : MonoBehaviour
         //Debug.Log($"Bounds {currentBounds}");
     }
 
+    private void Start()
+    {
+        currentBounds = Bounds.DEADZONE;
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
 

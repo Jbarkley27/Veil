@@ -32,6 +32,8 @@ public class InputManager : MonoBehaviour
         //ShootPrimary();
         //ShootSecondary();
         Roll();
+        Hover();
+        Boost();
     }
 
 
@@ -177,6 +179,7 @@ public class InputManager : MonoBehaviour
         if (input.actions["RollLeft"].IsPressed())
         {
             RollLeft = true;
+            AutoAlign = false;
         }
         else if (input.actions["RollLeft"].WasReleasedThisFrame())
         {
@@ -188,6 +191,7 @@ public class InputManager : MonoBehaviour
         if (input.actions["RollRight"].IsPressed())
         {
             RollRight = true;
+            AutoAlign = false;
         }
         else if (input.actions["RollRight"].WasReleasedThisFrame())
         {
@@ -204,6 +208,66 @@ public class InputManager : MonoBehaviour
             ThrustInput = context.ReadValue<Vector2>().normalized;
         }
     }
+
+    [Header("Hover")]
+    public static bool HoverUp = false;
+    public static bool HoverDown = false;
+
+    public void Hover()
+    {
+        if (input.actions["HoverUp"].IsPressed())
+        {
+            HoverUp = true;
+        }
+        else if (input.actions["HoverUp"].WasReleasedThisFrame())
+        {
+            HoverUp = false;
+        }
+
+
+
+        if (input.actions["HoverDown"].IsPressed())
+        {
+            HoverDown = true;
+        }
+        else if (input.actions["HoverDown"].WasReleasedThisFrame())
+        {
+            HoverDown = false;
+        }
+    }
+
+
+
+
+    [Header("Boost")]
+    public static bool Boosting = false;
+    public void Boost()
+    {
+        if (input.actions["Boost"].IsPressed())
+        {
+            Boosting = true;
+        }
+        else if (input.actions["Boost"].WasReleasedThisFrame())
+        {
+            Boosting = false;
+        }
+    }
+
+    public static bool AutoAlign = false;
+    public void AutoAlign_On(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            AutoAlign = true;
+        }
+    }
+
+    public static void AutoAlign_Off()
+    {
+        AutoAlign = false;
+    }
+
+
     #endregion
 
     // UTILITIES =====================
